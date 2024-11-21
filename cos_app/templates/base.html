@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}AA shops{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .carousel-item img {
+            height: 300px;
+            object-fit: contain;
+        }
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+        }
+        .btn.btn-primary {
+            background-color: aqua;
+            color: black;
+            border-color: azure;
+        }
+        .product-card {
+            height: 380px;
+            width: 300px;
+            margin: auto;
+            object-fit: contain;
+        }
+        .product-card img {
+            height: 150px;
+            margin-top: 6%;
+            object-fit: contain;
+        }
+        .card-body {
+            text-align: center;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>{% load static %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AA shops</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'wishlist' %}">Wishlist</a>
+                        </li>
+                        <li class="nav-link" style="color: black;">
+                            {% if user.is_authenticated %}
+                                <p>Welcome, {{ user.username }}!</p>
+                                </li><li class="nav-item">
+                                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                            {% else %}
+                                <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                                <a href="{% url 'signup' %}" class="btn btn-success">Sign Up</a>
+                            {% endif %}                        
+                        </li>
+                        </ul>
+                </div>
+            </nav>
+            
+        </div>
+    </nav>
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
